@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activ.SearchActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/yerevan2" />
+
+    <View
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="56dp"
+        android:alpha="0.4"
+        android:background="@android:color/black" />
+
+    <View
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="213dp"
+        android:layout_marginTop="56dp"
+        android:alpha="0.4"
+        android:background="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/category_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/category"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/type_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="125dp"
+                android:layout_marginTop="8dp"
+
+                android:text="@string/type"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/category_spiner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/type_spiner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="152dp"
+        android:alpha="0.4"
+        android:background="@android:color/black" />
+
+    <View
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="213dp"
+        android:layout_marginTop="152dp"
+        android:alpha="0.4"
+        android:background="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="112dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/rums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Number of rooms"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/column"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="57dp"
+                android:layout_marginTop="8dp"
+                android:text="Number of floors"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/room_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/floor_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="122dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="248dp"
+        android:alpha="0.5"
+        android:background="@android:color/black" />
+
+    <View
+        android:layout_width="242dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="248dp"
+        android:alpha="0.5"
+        android:background="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="208dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/price_text"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/price"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingStart="16dp"
+                android:text="@string/location"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/frome"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
+                android:gravity="center_horizontal"
+                android:hint="$"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/holo_orange_light"
+                android:textColorHint="@color/colorAccent" />
+
+            <Spinner
+                android:id="@+id/location_spinner"
+                android:layout_width="193dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="344dp"
+    android:alpha="0.5"
+    android:background="@android:color/black" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="304dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/adress_text"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Adress"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/adres_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="18sp"
+            android:hint="Example: 27 Ազատության պողոտա,"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/holo_orange_light"
+            android:textColorHint="@color/texthint" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="440dp"
+        android:alpha="0.6"
+        android:background="@android:color/black" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="400dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/desc_text"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Description"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/desc_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Example: Բնակարանը ժամանակակից նորոգումով, առանձին ննջարան, հյուրասենյակ ստուդիո, ջեռուցում:"
+            android:textSize="18sp"
+            android:textColor="@android:color/holo_orange_light"
+            android:textColorHint="@color/texthint"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
