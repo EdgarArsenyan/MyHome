@@ -22,6 +22,12 @@
     <string name="search">Search</string>
     <string name="category">Category</string>
     <string name="type">Type</string>
+    <string name="later">later</string>
+    <string name="enter_your_email">Enter Your email</string>
+    <string name="enter_your_password">Enter Your password</string>
+    <string name="loading">Loading…</string>
+    <string name="you_could_be_here">You could be here</string>
+    <string name="example">Example: Բնակարանը ժամանակակից նորոգումով, առանձին ննջարան, հյուրասենյակ ստուդիո, ջեռուցում:</string>
     <string-array name="location">
         <item>Yerevan(All)</item>
         <item>Ajapnyak</item>
@@ -58,6 +64,16 @@
         <item>9</item>
         <item>10 and more</item>
     </string-array>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="map">Map</string>
+    <string name="favorite">Favorite</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

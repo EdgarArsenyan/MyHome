@@ -33,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorPrimary));
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 ((TextView) parent.getChildAt(0)).setTextSize(20);
                 String text = parent.getItemAtPosition(position).toString();
             }
@@ -44,61 +44,13 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        ImageView searchImage = findViewById(R.id.search_image);
-        searchImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (SearchActivity.this, AddActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-}
-//android.widget.Spinner spinner;
-//    List<String> list;
-//    ArrayAdapter<String> SpinnerAdapter;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_search);
-//        spinner = (android.widget.Spinner) findViewById(R.id.spinner);
-//        list = new ArrayList<String>(); // List of Items
-//        list.add("Select your favorite city");
-//        list.add("Mumbai");
-//        list.add("Kolkata");
-//        list.add("Delhi");
-//        list.add("Goa");
-//        list.add("Bengaluru");
-//        list.add("Hyderabad");
-//        list.add("Ahmedabad");
-//
-//        SpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list){
-//            public View getView(int position, View convertView,
-//                                ViewGroup parent) {
-//                View v = super.getView(position, convertView, parent);
-//                ((android.widget.TextView) v).setTextColor(Color.parseColor("#FFC107"));
-//                return v;
-//            }
-//            public View getDropDownView(int position, View convertView,
-//                                        ViewGroup parent) {
-//                View v = super.getDropDownView(position, convertView,
-//                        parent);
-//                v.setBackgroundColor(getResources().getColor(R.color.t));
-//                ((android.widget.TextView) v).setTextColor(Color.parseColor("#FFC107"));
-//                return v;
-//            }
-//        };
-//        SpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(SpinnerAdapter);  // Set Adapter in the spinner
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        ImageView searchImage = findViewById(R.id.search_image);
+//        searchImage.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//                String state = parentView.getItemAtPosition(position).toString(); // selected item in the list
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//
+//            public void onClick(View v) {
+//                Intent intent = new Intent (SearchActivity.this, AddActivity.class);
+//                startActivity(intent);
 //            }
 //        });
-//    }
-//}
+    }
+}
