@@ -18,8 +18,6 @@ public class Statement {
         this.rooms = rooms;
         this.floor = floor;
         this.district = district;
-
-
     }
 
     public String getDistrict() {
