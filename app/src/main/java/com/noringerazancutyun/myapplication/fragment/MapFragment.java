@@ -1,6 +1,7 @@
-package com.noringerazancutyun.myapplication.map;
+package com.noringerazancutyun.myapplication.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,14 +9,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.noringerazancutyun.myapplication.R;
+import com.noringerazancutyun.myapplication.activ.EmailPasswordActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +58,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(yerevan, 11f));
         mMap.isMyLocationEnabled();
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+//                if (marker.getTitle().equals("Yerevan")){
+//                    Toast.makeText(getContext(), "Clicked "+ marker.getTitle(), Toast.LENGTH_SHORT).show();
+//                }
+                Intent intent = new Intent(getContext(), EmailPasswordActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
     }
 
 

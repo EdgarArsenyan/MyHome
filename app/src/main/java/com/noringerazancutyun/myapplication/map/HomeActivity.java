@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activ.AddActivity;
 import com.noringerazancutyun.myapplication.activ.SearchActivity;
-import com.noringerazancutyun.myapplication.models.FavoritListFragment;
+import com.noringerazancutyun.myapplication.fragment.HomeUserFragment;
+import com.noringerazancutyun.myapplication.fragment.MapFragment;
+import com.noringerazancutyun.myapplication.fragment.FavoritListFragment;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -35,21 +37,21 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    selectedFragment = new MapFragment();
-                    break;
-                case R.id.favorite:
-                    selectedFragment = new FavoritListFragment();
-
-                    break;
-                case R.id.navigation_notifications:
-                    selectedFragment = new MapFragment();
-
-                    break;
                 case R.id.map:
                     selectedFragment = new MapFragment();
 
                     break;
+                case R.id.navigation_home:
+                selectedFragment = new HomeUserFragment();
+                break;
+                case R.id.favorite:
+                selectedFragment = new FavoritListFragment();
+
+                break;
+                case R.id.navigation_notifications:
+                selectedFragment = new MapFragment();
+
+                break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedFragment).commit();
             return true;

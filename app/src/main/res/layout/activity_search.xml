@@ -9,7 +9,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/opera" />
+        android:background="@color/colorAccent"
+         />
 
     <View
         android:layout_width="match_parent"
@@ -54,14 +55,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text="RENT" />
 
                 <RadioButton
                     android:id="@+id/saleRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_weight="1"
                     android:text="SALE" />
 
@@ -69,7 +70,7 @@
                     android:id="@+id/hotelsRB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_weight="1"
                     android:text="HOTELS" />
 
@@ -118,14 +119,14 @@
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
 
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Apartments" />
 
             <CheckBox
                 android:id="@+id/check_house"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"
                 android:text="Houses" />
 
@@ -133,7 +134,7 @@
                 android:id="@+id/check_comercial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_weight="1"
                 android:text="Commercial" />
         </LinearLayout>

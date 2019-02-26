@@ -1,4 +1,4 @@
-package com.noringerazancutyun.myapplication.models;
+package com.noringerazancutyun.myapplication.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.bumptech.glide.Glide;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.adapter.FavoriteAdapter;
+import com.noringerazancutyun.myapplication.models.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
