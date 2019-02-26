@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activ.AddActivity;
 import com.noringerazancutyun.myapplication.activ.SearchActivity;
-import com.noringerazancutyun.myapplication.adapter.FavoriteAdapter;
 import com.noringerazancutyun.myapplication.models.FavoritListFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -63,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.map_menu, menu);
+        inflater.inflate(R.menu.home_menu, menu);
         return true;
     }
 

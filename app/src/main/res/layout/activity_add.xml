@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/yerevan2" />
+        android:background="@color/colorAccent" />
 
     <View
         android:layout_width="90dp"
@@ -46,7 +46,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:orientation="horizontal">
 
 
@@ -93,6 +93,7 @@
             <Spinner
                 android:id="@+id/category_spiner"
                 android:layout_width="26dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -101,6 +102,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1" />
 
             <EditText
@@ -299,7 +301,44 @@
             android:textColorHint="@color/texthint"
             />
 
+        <ImageView
+            android:id="@+id/add_images"
+            android:layout_width="99dp"
+            android:layout_height="29dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/add_images" />
+
+
+
+        <HorizontalScrollView
+            android:id="@+id/image_scroll"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="200dp">
+
+
+
+            <LinearLayout
+                android:id="@+id/gallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
     </LinearLayout>
+    <ImageView
+        android:id="@+id/save_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_width="72dp"
+        android:layout_height="34dp"
+        android:background="@drawable/savebtn" />
+
     
 
 </RelativeLayout>
