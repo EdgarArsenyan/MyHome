@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activ.EmailPasswordActivity;
+import com.noringerazancutyun.myapplication.activ.RegisterActivity;
 
 
 public class HomeUserFragment extends Fragment {
@@ -34,45 +35,31 @@ public class HomeUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home_user, container, false);
 
-        loginImg = v.findViewById(R.id.loginBtn);
+        loginImg = v.findViewById(R.id.login_img);
         createImg = v.findViewById(R.id.create_img);
-//        loginImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), EmailPasswordActivity.class);
-//                HomeUserFragment.this.startActivity(intent);
-//            }
-//        });
-//
-//        loginImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), RelativeLayout.class);
-//                HomeUserFragment.this.startActivity(intent);
-//            }
-//        });
-//        clickLogin();
-//        clickCreate();
+
+        clickLogin();
+        clickCreate();
         return v;
     }
 
-//    public void clickLogin(){
-//        loginImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), EmailPasswordActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-//
-//    public void clickCreate(){
-//        loginImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), RelativeLayout.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
+    public void clickLogin(){
+        loginImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EmailPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void clickCreate(){
+        createImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

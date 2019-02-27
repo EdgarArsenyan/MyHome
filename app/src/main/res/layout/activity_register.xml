@@ -4,29 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activ.RegisterActivity">
+    tools:context=".activ.RegisterActivity"
+    android:background="@color/colorAccent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/armenia"
-
-        />
 
     <ImageView
         android:id="@+id/user_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginHorizontal="130dp"
         android:layout_marginTop="60dp"
-        android:layout_margin="120dp"
-        app:srcCompat="@drawable/user1" />
+        app:srcCompat="@drawable/user" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="32dp"
+        android:layout_marginHorizontal="@dimen/fab_max_margin"
         android:layout_marginBottom="100dp"
         android:orientation="vertical"
 
@@ -39,7 +34,7 @@
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/texthint"
             android:textSize="18sp" />
 
@@ -50,7 +45,7 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/texthint"
             android:textSize="18sp" />
 
@@ -61,7 +56,7 @@
             android:ems="10"
             android:hint="@string/name"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/texthint"
             android:textSize="18sp" />
 
@@ -72,7 +67,7 @@
             android:ems="10"
             android:hint="Surname"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/holo_orange_light"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/texthint"
             android:textSize="18sp" />
 
@@ -81,25 +76,22 @@
             android:id="@+id/user_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_orange_light"
             android:hint="@string/edt_masked_custom_mobile_hint"
             android:inputType="phone"
+            android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/texthint"
             app:mask="(###)##-###-###" />
 
 
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="4dp"
+        <ImageView
+            android:id="@+id/create_img_register_activity"
+            android:layout_width="@dimen/button_wigth"
+            android:layout_height="@dimen/button_heigth"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="@android:color/black"
-            android:alpha="0.6"
-            android:text="@string/save" />
+            android:background="@drawable/create_button" />
 
 
     </LinearLayout>

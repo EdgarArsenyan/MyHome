@@ -33,13 +33,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity android:name=".activ.AddActivity"
-            android:parentActivityName=".map.HomeActivity"/>
+            android:parentActivityName=".activ.HomeActivity"/>
         <activity android:name=".activ.SearchActivity"
-            android:parentActivityName=".map.HomeActivity"/>
-        <activity android:name=".activ.RegisterActivity" />
-        <activity android:name=".activ.EmailPasswordActivity" />
+            android:parentActivityName=".activ.HomeActivity"/>
+        <activity android:name=".activ.RegisterActivity"
+            android:parentActivityName=".activ.HomeActivity"/>
+        <activity android:name=".activ.EmailPasswordActivity"
+            android:parentActivityName=".activ.HomeActivity"/>
         <activity
-            android:name=".map.HomeActivity"
+            android:name=".activ.HomeActivity"
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

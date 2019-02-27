@@ -1,4 +1,4 @@
-package com.noringerazancutyun.myapplication.map;
+package com.noringerazancutyun.myapplication.activ;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,18 +6,22 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.noringerazancutyun.myapplication.R;
-import com.noringerazancutyun.myapplication.activ.AddActivity;
-import com.noringerazancutyun.myapplication.activ.SearchActivity;
 import com.noringerazancutyun.myapplication.fragment.HomeUserFragment;
 import com.noringerazancutyun.myapplication.fragment.MapFragment;
 import com.noringerazancutyun.myapplication.fragment.FavoritListFragment;
+import com.noringerazancutyun.myapplication.fragment.UserMainHomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "EmailPassword";
+    EmailPasswordActivity mAgent = new EmailPasswordActivity();
 
 
     @Override
@@ -42,15 +46,21 @@ public class HomeActivity extends AppCompatActivity {
 
                     break;
                 case R.id.navigation_home:
-                selectedFragment = new HomeUserFragment();
+                    if(mAgent.user!=null){
+                        selectedFragment = new UserMainHomeFragment();
+
+                    }else {
+                        selectedFragment = new HomeUserFragment();
+
+                    }
                 break;
+
                 case R.id.favorite:
-                selectedFragment = new FavoritListFragment();
-
+                    selectedFragment = new FavoritListFragment();
                 break;
-                case R.id.navigation_notifications:
-                selectedFragment = new MapFragment();
 
+                case R.id.navigation_notifications:
+                    selectedFragment = new MapFragment();
                 break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.container, selectedFragment).commit();

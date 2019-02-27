@@ -314,6 +314,7 @@
             android:id="@+id/image_scroll"
             android:layout_width="match_parent"
             android:scrollbars="none"
+            android:layout_gravity="bottom"
             android:layout_height="200dp">
 
 

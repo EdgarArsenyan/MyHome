@@ -25,17 +25,18 @@
 
         <ImageView
             android:id="@+id/create_img"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/button_wigth"
+            android:layout_height="@dimen/button_heigth"
             android:layout_weight="1"
             android:layout_marginStart="50dp"
             android:background="@drawable/create_button" />
 
         <ImageView
             android:id="@+id/login_img"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/button_wigth"
+            android:layout_height="@dimen/button_heigth"
             android:layout_weight="1"
+            android:elevation="@dimen/fab_margin"
             android:layout_marginHorizontal="50dp"
             android:background="@drawable/login_button" />
 

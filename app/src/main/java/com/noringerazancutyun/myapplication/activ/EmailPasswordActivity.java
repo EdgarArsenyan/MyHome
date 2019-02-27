@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,9 +25,11 @@ public class EmailPasswordActivity extends BaseActivity  implements
 
     private static final String TAG = "EmailPassword";
 
-    Button login, register, laterBtn;
+    ImageView loginBtn;
+    FirebaseUser user;
+    String uID;
 
-    private FirebaseAuth mAuth;
+    public FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText loginEmail, loginPassword;
 
@@ -35,28 +38,29 @@ public class EmailPasswordActivity extends BaseActivity  implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_password);
-        register = findViewById(R.id.registerBtn);
-        login = findViewById(R.id.loginBtn);
-        login.setOnClickListener(this);
-        register.setOnClickListener(this);
-        laterBtn = findViewById(R.id.laterBtn);
+        loginBtn = findViewById(R.id.login_img_email_activity);
+        loginBtn.setOnClickListener(this);
         loginEmail = findViewById(R.id.email_text);
         loginPassword = findViewById(R.id.password_text);
         mAuth = FirebaseAuth.getInstance();
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EmailPasswordActivity.this, SearchActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        register.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(EmailPasswordActivity.this, RegisterActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // [START_EXCLUDE]
+                updateUI(user);
+                // [END_EXCLUDE]
+            }
+        };
+
     }
 
     private void createAccount(String email, String password) {
@@ -106,11 +110,13 @@ public class EmailPasswordActivity extends BaseActivity  implements
                         }
                     }
                 });
+        Intent intent = new Intent(EmailPasswordActivity.this, HomeActivity.class);
+        startActivity(intent);
 
     }
 
 
-    private boolean validateForm() {
+     boolean validateForm() {
         boolean valid = true;
 
         String email = loginEmail.getText().toString();
@@ -135,16 +141,17 @@ public class EmailPasswordActivity extends BaseActivity  implements
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+//         user = mAuth.getCurrentUser();
+        mAuth.addAuthStateListener(mAuthListener);
+        updateUI(user);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mAuth.signOut();
-        updateUI(null);
-    }
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+////        mAuth.signOut();
+//        updateUI(null);
+//    }
 
 
     private void updateUI(FirebaseUser user) {
@@ -164,19 +171,9 @@ public class EmailPasswordActivity extends BaseActivity  implements
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.registerBtn) {
-            createAccount(loginEmail.getText().toString(), loginPassword.getText().toString());
-            Intent intent = new Intent(EmailPasswordActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        } else if (i == R.id.loginBtn) {
+
+         if (i == R.id.login_img_email_activity) {
             signIn(loginEmail.getText().toString(), loginPassword.getText().toString());
         }
-
-//            if (i == R.id.loginBtn) {
-//                signIn(loginEmail.getText().toString(), loginPassword.getText().toString());
-//                Intent intent = new Intent(EmailPasswordActivity.this, MapsActivity.class);
-//                startActivity(intent);
-//            }
-
     }
 }
