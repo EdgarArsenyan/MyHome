@@ -1,21 +1,14 @@
-package com.noringerazancutyun.myapplication.activ;
+package com.noringerazancutyun.myapplication.activity;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.noringerazancutyun.myapplication.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 

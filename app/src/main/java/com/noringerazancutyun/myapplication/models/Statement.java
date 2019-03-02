@@ -7,12 +7,12 @@ public class Statement {
     private String rooms;
     private String floor;
     private String district;
-    private String adress;
+    private String address;
     private String desc;
     private int image;
 
 
-    public Statement(  String price, String district,String rooms, String floor) {
+    public Statement(String price, String district,String rooms, String floor) {
 
         this.price = price;
         this.rooms = rooms;
@@ -76,12 +76,12 @@ public class Statement {
         this.floor = floor;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDesc() {

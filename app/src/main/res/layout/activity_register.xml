@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activ.RegisterActivity"
+    tools:context=".activity.RegisterActivity"
     android:background="@color/colorAccent">
 
 
@@ -22,32 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="@dimen/fab_max_margin"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="130dp"
         android:orientation="vertical"
 
         >
-
-        <EditText
-            android:id="@+id/user_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/texthint"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/user_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/texthint"
-            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/user_name"

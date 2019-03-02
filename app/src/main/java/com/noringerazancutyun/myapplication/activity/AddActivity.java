@@ -1,4 +1,4 @@
-package com.noringerazancutyun.myapplication.activ;
+package com.noringerazancutyun.myapplication.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

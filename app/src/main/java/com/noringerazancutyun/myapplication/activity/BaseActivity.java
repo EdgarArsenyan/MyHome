@@ -1,4 +1,4 @@
-package com.noringerazancutyun.myapplication.activ;
+package com.noringerazancutyun.myapplication.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;

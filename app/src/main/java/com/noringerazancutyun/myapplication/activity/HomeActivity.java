@@ -1,4 +1,4 @@
-package com.noringerazancutyun.myapplication.activ;
+package com.noringerazancutyun.myapplication.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,23 +6,22 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.fragment.HomeUserFragment;
 import com.noringerazancutyun.myapplication.fragment.MapFragment;
 import com.noringerazancutyun.myapplication.fragment.FavoritListFragment;
 import com.noringerazancutyun.myapplication.fragment.UserMainHomeFragment;
+import com.noringerazancutyun.myapplication.util.MyFirebase;
 
 public class HomeActivity extends AppCompatActivity {
-    private static final String TAG = "EmailPassword";
-    EmailPasswordActivity mAgent = new EmailPasswordActivity();
 
+MyFirebase firebase = new MyFirebase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).commit();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -46,10 +46,9 @@ public class HomeActivity extends AppCompatActivity {
 
                     break;
                 case R.id.navigation_home:
-                    if(mAgent.user!=null){
+                    if(firebase.mAuth.getUid()!=null) {
                         selectedFragment = new UserMainHomeFragment();
-
-                    }else {
+                    }else{
                         selectedFragment = new HomeUserFragment();
 
                     }
@@ -79,11 +78,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-            case R.id.add_item:
-                Intent intent = new Intent(HomeActivity.this, AddActivity.class);
-                startActivity(intent);
-                break;
 
             case R.id.search_item:
                 Intent intent1 = new Intent(HomeActivity.this, SearchActivity.class);

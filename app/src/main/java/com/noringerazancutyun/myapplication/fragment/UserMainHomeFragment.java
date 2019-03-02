@@ -12,18 +12,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.noringerazancutyun.myapplication.R;
-import com.noringerazancutyun.myapplication.activ.AddActivity;
-import com.noringerazancutyun.myapplication.activ.EmailPasswordActivity;
-import com.noringerazancutyun.myapplication.activ.HomeActivity;
-import com.noringerazancutyun.myapplication.activ.RegisterActivity;
+import com.noringerazancutyun.myapplication.activity.AddActivity;
+import com.noringerazancutyun.myapplication.activity.HomeActivity;
+import com.noringerazancutyun.myapplication.activity.RegisterActivity;
+import com.noringerazancutyun.myapplication.models.UserInform;
+import com.noringerazancutyun.myapplication.util.MyFirebase;
 
 
 public class UserMainHomeFragment extends Fragment {
 
     FloatingActionButton mAddStatement;
-    TextView mProfile, mNotification, mHistory, mStatement, mLogout;
-    FirebaseAuth authForMainHome;
+    TextView mProfile, mNotification, mHistory, mStatement, mLogout, mUserName;
+    MyFirebase firebase = new MyFirebase();
+    UserInform user = new UserInform();
 
     public UserMainHomeFragment() {
     }
@@ -42,6 +46,7 @@ public class UserMainHomeFragment extends Fragment {
         mHistory = view.findViewById(R.id.history_txt);
         mStatement = view.findViewById(R.id.statement_txt);
         mLogout = view.findViewById(R.id.logout_txt);
+        mUserName = view.findViewById(R.id.user_name_surmname_txt);
 
         mAddStatement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,9 +57,19 @@ public class UserMainHomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-clickLogoutAction();
+        textUser();
+        clickLogoutAction();
         return view;
+    }
+
+    private void textUser() {
+if (firebase.mAuth.getUid()!= null){
+    mUserName.setText(user.mUserName + "  " + user.mUserSurname);
+
+}else{
+    mUserName.setText("User");
+}
+
     }
 
 
@@ -103,9 +118,9 @@ clickLogoutAction();
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), HomeActivity.class);
+                firebase.mAuth.signOut();
+                firebase.mAuth.addAuthStateListener(firebase.listener);
                 startActivity(intent);
-                    authForMainHome.signOut();
-
             }
         });
     }
