@@ -11,13 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activity.AddActivity;
 import com.noringerazancutyun.myapplication.activity.HomeActivity;
-import com.noringerazancutyun.myapplication.activity.RegisterActivity;
+import com.noringerazancutyun.myapplication.activity.UserInfoActivity;
 import com.noringerazancutyun.myapplication.models.UserInform;
 import com.noringerazancutyun.myapplication.util.MyFirebase;
 
@@ -40,7 +37,7 @@ public class UserMainHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_main_home, container, false);
 
-        mAddStatement = view.findViewById(R.id.floatingButton_statement);
+        mAddStatement = view.findViewById(R.id.add_statement_button);
         mProfile = view.findViewById(R.id.profile_txt);
         mNotification = view.findViewById(R.id.notification_txt);
         mHistory = view.findViewById(R.id.history_txt);
@@ -51,14 +48,13 @@ public class UserMainHomeFragment extends Fragment {
         mAddStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(getActivity(), AddActivity.class);
                 startActivity(intent);
             }
         });
         textUser();
         clickLogoutAction();
+        clickProfileAction();
         return view;
     }
 
@@ -73,11 +69,11 @@ if (firebase.mAuth.getUid()!= null){
     }
 
 
-    public void clicProfileAction(){
+    public void clickProfileAction(){
         mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                Intent intent = new Intent(getContext(), UserInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +83,7 @@ if (firebase.mAuth.getUid()!= null){
         mNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                Intent intent = new Intent(getContext(), UserInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,7 +93,7 @@ if (firebase.mAuth.getUid()!= null){
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                Intent intent = new Intent(getContext(), UserInfoActivity.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +103,7 @@ if (firebase.mAuth.getUid()!= null){
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                Intent intent = new Intent(getContext(), UserInfoActivity.class);
                 startActivity(intent);
             }
         });

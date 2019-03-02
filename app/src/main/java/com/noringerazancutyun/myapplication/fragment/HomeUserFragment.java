@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activity.EmailPasswordActivity;
-import com.noringerazancutyun.myapplication.activity.RegisterActivity;
 
 
 public class HomeUserFragment extends Fragment {

@@ -13,11 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.noringerazancutyun.myapplication.R;
-import com.noringerazancutyun.myapplication.fragment.HomeUserFragment;
 import com.noringerazancutyun.myapplication.util.MyFirebase;
 
 
@@ -82,7 +79,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = firebase.mAuth.getCurrentUser();
-                            Intent intent = new Intent (EmailPasswordActivity.this, RegisterActivity.class);
+                            Intent intent = new Intent (EmailPasswordActivity.this, UserInfoActivity.class);
                             startActivity(intent);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
