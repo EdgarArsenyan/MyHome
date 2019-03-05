@@ -31,12 +31,13 @@ import com.noringerazancutyun.myapplication.activity.UserInfoActivity;
 import com.noringerazancutyun.myapplication.models.UserInform;
 import com.noringerazancutyun.myapplication.util.MyFirebase;
 
+import static android.app.Activity.RESULT_OK;
 import static android.support.constraint.Constraints.TAG;
 
 
 public class UserMainHomeFragment extends Fragment {
 
-
+    private static final int REQUEST_FOR_LOGIN = 10;
 
     FloatingActionButton mAddStatement;
     TextView mProfile, mNotification, mHistory, mStatement, mLogout, mUserName;
@@ -51,8 +52,6 @@ public class UserMainHomeFragment extends Fragment {
 
     public UserMainHomeFragment() {
     }
-
-
 
 
     @Override
@@ -84,37 +83,29 @@ public class UserMainHomeFragment extends Fragment {
         readFromDB();
 
 
-
         clickLogoutAction();
         clickProfileAction();
         return view;
     }
 
-
-
-    private void textUser() {
-if (firebase.mAuth.getUid()!= null){
-    String link  = (user.getmUserName() + "  " + user.getmUserSurname());
-    mUserName.setText(link);
-
-}else{
-    mUserName.setText("User");
-}
-
-    }
-
-
-    public void clickProfileAction(){
+    public void clickProfileAction() {
         mProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), UserInfoActivity.class);
-                startActivity(intent);
+             startActivityForResult(intent, REQUEST_FOR_LOGIN);
             }
         });
     }
 
-    public void clickNotificAction(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_FOR_LOGIN && resultCode == RESULT_OK) {return;}
+        String name = data.getStringExtra("name");
+
+    }
+
+    public void clickNotificAction() {
         mNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +115,7 @@ if (firebase.mAuth.getUid()!= null){
         });
     }
 
-    public void clickhistoryAction(){
+    public void clickhistoryAction() {
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +125,7 @@ if (firebase.mAuth.getUid()!= null){
         });
     }
 
-    public void clickStatementAction(){
+    public void clickStatementAction() {
         mHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +135,7 @@ if (firebase.mAuth.getUid()!= null){
         });
     }
 
-    public void clickLogoutAction(){
+    public void clickLogoutAction() {
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,15 +147,14 @@ if (firebase.mAuth.getUid()!= null){
         });
     }
 
-    private void readFromDB(){
+    private void readFromDB() {
         mDataBaseReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(UserInform.class);
                 Log.d(TAG, "User name: " + user.getmUserName() + ", email " + user.getmUserEmail());
-                String link  = (user.getmUserName() + "  " + user.getmUserSurname());
-
-                mUserName.setText(link);
+                String nameSurname = (user.getmUserName() + "  " + user.getmUserSurname());
+                mUserName.setText(nameSurname);
                 userSetImage();
             }
 
@@ -175,9 +165,9 @@ if (firebase.mAuth.getUid()!= null){
         });
     }
 
-    private void userSetImage(){
+    private void userSetImage() {
 
-        Glide.with(getContext()).load(user.getmImageUrl()).placeholder(R.mipmap.ic_launcher)
+        Glide.with(getContext()).load(user.getmImageUrl()).placeholder(R.drawable.avatar_icon)
                 .fitCenter().into(mUserProfileImage);
     }
 
