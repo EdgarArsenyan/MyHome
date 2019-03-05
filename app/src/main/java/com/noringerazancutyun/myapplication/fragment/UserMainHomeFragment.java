@@ -3,14 +3,27 @@ package com.noringerazancutyun.myapplication.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.activity.AddActivity;
 import com.noringerazancutyun.myapplication.activity.HomeActivity;
@@ -18,13 +31,23 @@ import com.noringerazancutyun.myapplication.activity.UserInfoActivity;
 import com.noringerazancutyun.myapplication.models.UserInform;
 import com.noringerazancutyun.myapplication.util.MyFirebase;
 
+import static android.support.constraint.Constraints.TAG;
+
 
 public class UserMainHomeFragment extends Fragment {
 
+
+
     FloatingActionButton mAddStatement;
     TextView mProfile, mNotification, mHistory, mStatement, mLogout, mUserName;
+    ImageView mUserProfileImage;
     MyFirebase firebase = new MyFirebase();
     UserInform user = new UserInform();
+    private DatabaseReference mDataBaseReference;
+    String userID;
+    FirebaseAuth mAuth;
+    FirebaseUser firebaseUser;
+
 
     public UserMainHomeFragment() {
     }
@@ -41,9 +64,15 @@ public class UserMainHomeFragment extends Fragment {
         mProfile = view.findViewById(R.id.profile_txt);
         mNotification = view.findViewById(R.id.notification_txt);
         mHistory = view.findViewById(R.id.history_txt);
+        mUserProfileImage = view.findViewById(R.id.user_profie_image);
         mStatement = view.findViewById(R.id.statement_txt);
         mLogout = view.findViewById(R.id.logout_txt);
         mUserName = view.findViewById(R.id.user_name_surmname_txt);
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+
+        mDataBaseReference = FirebaseDatabase.getInstance().getReference("User");
+        userID = firebaseUser.getUid();
 
         mAddStatement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,15 +81,21 @@ public class UserMainHomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        textUser();
+        readFromDB();
+
+
+
         clickLogoutAction();
         clickProfileAction();
         return view;
     }
 
+
+
     private void textUser() {
 if (firebase.mAuth.getUid()!= null){
-    mUserName.setText(user.mUserName + "  " + user.mUserSurname);
+    String link  = (user.getmUserName() + "  " + user.getmUserSurname());
+    mUserName.setText(link);
 
 }else{
     mUserName.setText("User");
@@ -120,5 +155,31 @@ if (firebase.mAuth.getUid()!= null){
             }
         });
     }
+
+    private void readFromDB(){
+        mDataBaseReference.child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(UserInform.class);
+                Log.d(TAG, "User name: " + user.getmUserName() + ", email " + user.getmUserEmail());
+                String link  = (user.getmUserName() + "  " + user.getmUserSurname());
+
+                mUserName.setText(link);
+                userSetImage();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void userSetImage(){
+
+        Glide.with(getContext()).load(user.getmImageUrl()).placeholder(R.mipmap.ic_launcher)
+                .fitCenter().into(mUserProfileImage);
+    }
+
 
 }

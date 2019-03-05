@@ -13,6 +13,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,35 +22,41 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.noringerazancutyun.myapplication.R;
 import com.noringerazancutyun.myapplication.models.UserInform;
 
+import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int GALLERY_REQUEST_CODE = 1;
-    private static final int CAMERA_REQUEST_CODE  = 2;
+    private static final int CAMERA_REQUEST_CODE = 2;
     private static final int CAMERA_PERMISSION_CODE = 10;
 
     private EditText mName, mSurname, mPhone;
     private ImageView mSaveButton, mUserImage;
-    ProgressDialog mDialog;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDataBaseReference;
     private StorageReference mReference;
-    private String mImagePath;
+    private String userID;
+    UserInform userInfo;
 
 
     @Override
@@ -68,11 +76,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
         registerForContextMenu(mUserImage);
 
-        mAuth = FirebaseAuth.getInstance();
         mDataBaseReference = FirebaseDatabase.getInstance().getReference("User");
         mReference = FirebaseStorage.getInstance().getReference();
+        userID = user.getUid();
 
         mSaveButton.setOnClickListener(this);
+//        writeFromDatabase();
+
 
     }
 
@@ -84,7 +94,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.from_gallery:
                 openGallery();
                 break;
@@ -97,22 +107,33 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         return super.onContextItemSelected(item);
     }
 
-    private void writeToDataBase(){
+    private void writeToDataBase() {
 
         String name = mName.getText().toString().trim();
         String surname = mSurname.getText().toString();
         String phone = mPhone.getText().toString();
         String email = user.getEmail();
-
-        UserInform userInfo = new UserInform(name, email, surname, phone);
+        userInfo = new UserInform(name, email, surname, phone);
         mDataBaseReference.child(user.getUid()).setValue(userInfo);
 
     }
+//    private void writeFromDatabase(){
+//        if(userInfo.getmUserName()!=null && userInfo.getmUserSurname()!= null && userInfo.getmUserPhoneNumber() !=null) {
+//            mName.setText(userInfo.getmUserName());
+//            mSurname.setText(userInfo.getmUserSurname());
+//            mPhone.setText(userInfo.getmUserPhoneNumber());
+//        }else{
+//            mName.setText("Name");
+//            mSurname.setText("Surname");
+//            mPhone.setText(R.string.edt_masked_custom_mobile_hint);
+//        }
+//    }
+
 
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case (R.id.create_img_register_activity):
                 writeToDataBase();
@@ -124,11 +145,11 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    public  void openGallery(){
+    public void openGallery() {
         Intent galleryAction = new Intent();
         galleryAction.setType("image/*");
         galleryAction.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(galleryAction,"Select Picture"), GALLERY_REQUEST_CODE);
+        startActivityForResult(Intent.createChooser(galleryAction, "Select Picture"), GALLERY_REQUEST_CODE);
     }
 
 
@@ -137,8 +158,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode == CAMERA_PERMISSION_CODE) {
-            if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 cameraPermissionResult(true);
             } else {
                 cameraPermissionResult(false);
@@ -147,8 +168,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
 
     }
+
     private void getCameraPermission() {
-        if(ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(UserInfoActivity.this,
@@ -161,7 +183,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void cameraPermissionResult(boolean cameraPermissionGranted) {
-        if(cameraPermissionGranted) {
+        if (cameraPermissionGranted) {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, CAMERA_REQUEST_CODE);
         } else {
@@ -173,28 +195,41 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
 
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.show();
             Uri imageUri = data.getData();
-            Uri realPath = getRealPathFromURI(imageUri);
 
-            StorageReference myPath = mReference.child("USER BOX").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-            myPath.putFile(realPath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            StorageReference myPath = mReference.child("USER BOX").child(imageUri.getLastPathSegment());
+            myPath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-//                   mProgressDialog.dismiss();
+                   mProgressDialog.dismiss();
                 }
             });
+        } else if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.show();
+
+            final Uri imageUri = data.getData();
+            StorageReference myPath = mReference.child("USER BOX").child(imageUri.getLastPathSegment());
+            myPath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    Task<Uri> newUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                    userInfo = new UserInform(newUri.toString());
+
+                    mDataBaseReference.child(user.getUid()).setValue(userInfo);
+                    mProgressDialog.dismiss();
+                }
+            });
+
         }
 
     }
-    public Uri getRealPathFromURI(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return Uri.parse(cursor.getString(idx));
-    }
+
 }
